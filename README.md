@@ -20,6 +20,12 @@ function easing(x) {
 graph.add(easing);
 ```
 
+Set colors:
+
+```js
+graph.add(function(x) { return -Math.round(x*x); }, "#00ff00");
+```
+
 To include external libraries use `// script="URL"`:
 
 ```js

@@ -56,8 +56,8 @@ function Graph() {
     $("input.jsgcalc_ymax").val(Math.round(this.calc.currCoord.y2*1000)/1000);
   }
 
-  this.add=function(f) {
-    this.calc.lines.push({equation: f, color: this.lineColors[this.calc.lines.length] });
+  this.add=function(f, color) {
+    this.calc.lines.push({equation: f, color: color||this.lineColors[this.calc.lines.length] });
     this.calc.draw();
   }
 
