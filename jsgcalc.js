@@ -636,7 +636,8 @@ function JSgCalc(jsgui, element){
   };
 
   this.mouseWheel=function(event) {
-    var delta=event.originalEvent.wheelDelta/120;
+    var delta=event.originalEvent.wheelDelta;
+    if (delta===undefined) { delta=event.originalEvent.detail; event=undefined; }
     if(delta > 0) this.zoom(this.zoomFactor, event);
     else this.zoom(-this.zoomFactor, event);
   };
@@ -743,6 +744,10 @@ function JSgCalc(jsgui, element){
         self.mouseDown(event);
       });
       $("#graph").bind('mousewheel', function(event) {
+        self.mouseWheel(event);
+        return false;
+      });
+      $("#graph").bind('DOMMouseScroll', function(event) {
         self.mouseWheel(event);
         return false;
       });
