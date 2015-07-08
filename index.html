@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>js-graphy - Visualize, Test, Tweak and Play with JavaScript Math</title>
+
+  <link rel="stylesheet" type="text/css" href="graphy.css" />
+
+  <script type="text/javascript" src="http://ajaxorg.github.io/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
+
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="calc.js"></script>
+  <script type="text/javascript" src="jsgcalc.js"></script>
+  <script type="text/javascript" src="graphy.js"></script>
+
+  <script type="text/javascript" src="jquery.splitter.js"></script>
+
+</head>
+
+<body>
+
+<div id="vsplitter">
+
+<div id="wrapper">
+
+  <div id="toolbar">
+    <a href="https://github.com/laktak/js-graphy" target="_blank" id="github"><img src="images/github.png" title="Fork on Github"/></a>
+    <div id="tool_select">
+      <a href="javascript:void(0)" onclick="graph.setTool('pointer')" id="tool_select_pointer" class="toolbar_option toolbar_selected"> <img src="images/pointer.png" alt="Pointer" title="Pointer"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('trace')" id="tool_select_trace" class="toolbar_option"> <img src="images/trace.png" alt="Trace" title="Trace"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('vertex')" id="tool_select_vertex" class="toolbar_option"> <img src="images/minmax.png" alt="Local Minima/Maxima" title="Local Minima/Maxima"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('root')" id="tool_select_root" class="toolbar_option"> <img src="images/root.png" alt="Root" title="Root"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('intersect')" id="tool_select_intersect" class="toolbar_option"> <img src="images/intersect.png" alt="Intersect" title="Intersect"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('derivative')" id="tool_select_derivative" class="toolbar_option"> <img src="images/derivative.png" alt="Derivative" title="Derivative"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('zoombox')" id="tool_select_zoombox" class="toolbar_option"> <img src="images/zoombox.png" alt="ZoomBox" title="ZoomBox"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('zoomin')" id="tool_select_zoomin" class="toolbar_option"> <img src="images/zoomin.png" alt="Zoom In" title="Zoom In"/></a>
+      <a href="javascript:void(0)" onclick="graph.setTool('zoomout')" id="tool_select_zoomout" class="toolbar_option"> <img src="images/zoomout.png" alt="Zoom Out" title="Zoom Out"/></a>
+    </div>
+  </div>
+
+  <div id="toolboxes">
+    <div class="toolbox" id="toolbox_zoombox">
+      <div class="toolbox_header">
+        <div class="toolbox_close"><a href="javascript: void(0)">close</a></div>
+        Window Options
+      </div>
+
+      <div class="toolbox_main">
+        <table>
+          <tr>
+            <td></td>
+            <td align="center">y-max: <input id="toolbox_zoombox_ymax" class="jsgcalc_ymax" type="text" size="4" /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>x-min:<br /><input id="toolbox_zoombox_xmin" class="jsgcalc_xmin" type="text" size="4" /></td>
+            <td align="center"><img src="images/graph.png" style="width: 70px;"/></td>
+            <td>x-max:<br /><input id="toolbox_zoombox_xmax" class="jsgcalc_xmax" type="text" size="4" /></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="center">y-min: <input id="toolbox_zoombox_ymin" class="jsgcalc_ymin" type="text" size="4" /></td>
+            <td></td>
+          </tr>
+        </table>
+
+        <a class="fancybutton" href="javascript: void(0)"
+          onclick="jsgcalc.setWindow($('#toolbox_zoombox_xmin').val(), $('#toolbox_zoombox_xmax').val(), $('#toolbox_zoombox_ymin').val(), $('#toolbox_zoombox_ymax').val())">
+            Apply</a>
+        <br /><br />
+        <a href="javascript: void(0);" onclick="jsgcalc.resetZoom()">Reset View</a>
+      </div>
+    </div>
+
+    <div class="toolbox" id="toolbox_trace">
+      <div class="toolbox_header">
+        <div class="toolbox_close"><a href="javascript: void(0)">close</a></div>
+        Trace
+      </div>
+
+      <div class="toolbox_main">
+        x: <input id="toolbox_trace_input" class="jsgcalc_trace_input" type="text" size="20" style="width: 95%" /><br />
+        y: <input id="toolbox_trace_output" class="jsgcalc_trace_output" type="text" size="20" style="width: 95%" /><br /><br />
+
+        <a class="fancybutton" href="javascript: void(0)" onclick="graph.doTrace($('#toolbox_trace_input').val())">Trace</a><br />
+      </div>
+    </div>
+  </div>
+
+  <div id="graph_wrapper">
+    <canvas id="graph"></canvas>
+  </div>
+
+</div>
+
+<div id="code">
+  <div id="edit">graph.add(function(x) { return x*x; });
+graph.add(function(x) { return -Math.round(x*x); });
+graph.add(function(x) { return x*x%x; });
+
+function trekkie(x) { return x<0?x*x*x%x:0; };
+graph.add(trekkie);
+</div>
+
+  <div id="status"><div id="status-info"><a href="https://github.com/laktak/js-graphy/blob/master/README.md" target="_blank">Help</a></div><div id="status-text"></div></div>
+</div>
+
+</div>
+
+</body>
+
+</html>
