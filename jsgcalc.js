@@ -13,7 +13,7 @@ function widthPlusPadding(elem) {
 }
 
 function JSgCalc(jsgui, element){
-  var pixR=window.devicePixelRatio;
+  var pixR=window.devicePixelRatio||1;
 
   this.graph=document.getElementById(element);
   this.graphElement=$("#"+element);
@@ -250,7 +250,7 @@ function JSgCalc(jsgui, element){
       if(tempanswer===false)
         continue;
       tempanswer=Math.round(tempanswer * 10000000) / 10000000;
-      dump(tempanswer);
+      //dump(tempanswer);
       if(tempanswer!==false && (answer===false || Math.abs(xpos - answer) > Math.abs(xpos - tempanswer))) {
         answer=tempanswer;
         equation=equation1;

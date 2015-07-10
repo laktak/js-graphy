@@ -187,23 +187,14 @@ function calc() {
 
   //Uses Newton's method to find the root of the equation. Accurate enough for these purposes.
   this.getRoot = function(equation, guess, range, shifted){
-        var expr = Parser.parse(equation);
 
-    dump(equation + ", guess: "+guess);
-    //Newton's method becomes very inaccurate if the root is too close to zero. Therefore we just whift everything over a few units.
+    //dump(equation + ", guess: "+guess);
+    // Newton's method becomes very inaccurate if the root is too close to zero. Therefore we just whift everything over a few units.
     if((guess > -0.1 && guess < 0.1) && shifted != true) {
-            var replacedEquation = equation;
+      var replacedEquation = function(x) { return equation(x+5); };
 
-            var variables = expr.variables();
-
-            if (variables.length > 0) {
-              var v = variables[0];
-              replacedEquation = replacedEquation.replace(new RegExp('\\b' + v + '\\b', 'g'), '(' + v + '+5)');
-            }
-
-      dump('Replaced equation = ' + replacedEquation);
-      var answer = this.getRoot(replacedEquation, (guess - 5), range, true);
-      dump(answer);
+      var answer = this.getRoot(replacedEquation, guess-5, range, true);
+      //dump(answer);
       if(answer !== false)
         return answer + 5;
       return false;
@@ -215,17 +206,16 @@ function calc() {
     var center = guess;
     var prev = guess;
     var j = 0;
-    var f = expr.toJSFunction(expr.variables());
 
     while (prev > center - range && prev < center + range && j < 100) {
       var xval = prev;
-      var answer = f(xval);
+      var answer = equation(xval);
 
       if (answer > -this.eps && answer < this.eps) {
         return prev;
       }
 
-      var derivative = this.getDerivative(f, xval);
+      var derivative = this.getDerivative(equation, xval);
       if (!isFinite(derivative))
         break;
 
@@ -246,8 +236,7 @@ function calc() {
 
   //Uses Newton's method for finding the intersection of the two equations. Actually very simple.
   this.getIntersection = function(equation1, equation2, guess, range){
-    //dump("("+equation1 + ") - (" + equation2 + "); guess at "+guess);
-    return this.getRoot("("+equation1 + ") - (" + equation2 + ")", guess, range);
+    return this.getRoot(function(x) { return  equation1(x)-equation2(x); }, guess, range);
   };
 
   this.getDerivative = function(f, xval){
@@ -304,85 +293,6 @@ function calc() {
       magnitude = Math.pow(10, power);
       shifted = Math.round(num*magnitude);
       return shifted/magnitude;
-  };
-
-  this.parseEquation = function(input, recur) {
-    if(this.eqcache[input])
-      return this.eqcache[input];
-
-    var equation = input;
-    var newequation = "";
-    var bracketdepth = 0; //The depth of the braket
-    var bracketstart = 0; //Where the fuirst braket started
-    var lastchar = "";
-    var i = 0;
-
-    for(i; i < equation.length; i++) {
-      var currchar = equation[i];
-
-      if(bracketdepth !== 0) {
-        if (currchar === "(") {
-          bracketdepth++;
-        }
-        else if(currchar === ")") {
-          bracketdepth--;
-        }
-
-        if(bracketdepth !== 0)
-          continue;
-      }
-
-      var newlength = newequation.length;
-      if(currchar.match(/[a-zA-Z]/)) {  //letter
-        if(lastchar == ")" || lastchar.match(/[0-9]/) || lastchar == "|" || lastchar == "x")
-          newequation += "*";
-        newequation += currchar;
-      }
-
-      if(currchar.match(/[0-9]/)) { //number
-        newequation += currchar;
-      }
-
-      if(currchar.match(/\./)) {  //decimal
-        if(!lastchar.match(/[0-9]/))
-          newequation += "0";
-        newequation += currchar;
-      }
-
-      if(currchar.match(/[\*\/\-\+\%\^]/)) {  //operator
-        newequation += currchar;
-      }
-
-      if(currchar === "(") {
-        bracketdepth++;
-        bracketstart = i;
-      }
-
-      if(currchar === ")") {
-        bracketend = i;
-        newequation += "(" + this.parseEquation(input.substr(bracketstart + 1, bracketend - bracketstart - 1), false) + ")";
-      }
-
-      if(currchar !== " ")
-        lastchar = currchar;
-    }
-
-    if(recur === true) {
-      if(newequation.match(/\(/g)) {
-        if(newequation.match(/\)/g)) {
-          for(i=0;i<newequation.match(/\(/g).length - newequation.match(/\)/g).length;i++)  //append unclosed brackets
-            newequation += ")";
-        }
-        else {
-          for(i=0;i<newequation.match(/\(/g).length;i++)  //append unclosed brackets
-            newequation += ")";
-        }
-      }
-
-      this.eqcache[input] = newequation;
-      dump(equation+" parsed as: "+newequation);
-    }
-    return newequation;
   };
 
   this.roundFloat = function(val) { //Stupid flaoting point inprecision...
