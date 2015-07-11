@@ -9,7 +9,6 @@ body { font-family: "Open Sans", sans-serif; font-size: 9pt; overflow: hidden; m
 #status-info { float: right; padding-right: 8px; }
 .vsplitbar { background: #aaa; }
 
-
 #github { width: 36px; height: 36px; padding: 8px 3px; position: absolute; z-index: 10; right: 0; top: 0;}
 
 #toolbar { width: 36px; padding: 55px 5px 0px 5px; height: 100%; background: #EDEDED; border-left: 1px solid #BBB; position: absolute; z-index: 10; right: 0; top: 0;}
@@ -24,14 +23,6 @@ body { font-family: "Open Sans", sans-serif; font-size: 9pt; overflow: hidden; m
 .toolbox_close { float: right; display: inline-block;}
 .toolbox_main { padding: 3px;}
 
-.graph_input_wrapper { margin-bottom: 5px; padding: 4px 6px; margin: 1px 0px; font-family: "Droid Serif", "Georgia", serif; font-size: 12pt;}
-.active_equation { background: #F0F0F0; padding: 3px 5px; border: 1px solid #CCC; border-radius: 5px; text-shadow:1px 1px 0px #FAFAFA;
-  -webkit-box-shadow: inset 0px -900px 50px -900px rgba(150, 150, 150, 0.3), inset 0px 1px 0px 0px #FFF;
-  box-shadow: inset 0px -900px 40px -900px rgba(150, 150, 150, 0.3), inset 0px 1px 0px 0px #FFF; }
-.graph_equation_display span { padding-right: 5px;}
-.graph_color_indicator { height: 22px; width: 22px; border: 1px solid #BBB; float: right;}
-#graph_inputs input { height: 16px; padding: 1px; clear: both; width: 156px; border: 1px solid #BBB; padding: 3px; font-size: 12pt; font-family: "Droid Serif", "Georgia", serif;}
-
 #graph_wrapper { width: 100%; height: 100%; width: 100%; z-index: 2; margin-right: 250px;}
 #graph_wrapper:hover { cursor: crosshair;}
 #graph_wrapper:active { cursor: move;}
@@ -42,10 +33,6 @@ h1 { margin: 0; padding: 0;}
 .options_list { line-height: 25px;}
 .option { color: #666; border: 1px solid #BBB; background: #E7E7E7; border-radius: 5px; padding: 1px 4px;}
 .option_selected { font-weight: bold; color: #000; background: #F6F6F6; border: 1px solid #999; }
-
-textarea { border: 1px dashed #56ADFF; outline: none; resize: none; overflow: hidden; white-space: nowrap; font-family: 'times new roman' ,georgia, serif;
-  font-size: 14pt; min-width: 1em; height: 1em; padding: 0.2em}
-textarea:focus { border: 1px solid #56ADFF;}
 
 a { text-decoration: none;}
 a:hover { text-decoration: underline;}

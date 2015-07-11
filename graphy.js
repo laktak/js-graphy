@@ -122,7 +122,7 @@ $(function() {
   $("#vsplitter").bind("split.resize", resize);
 
   edit.setTheme("ace/theme/monokai");
-  //edit.session.setMode("ace/mode/text");
+  edit.session.setMode("ace/mode/javascript");
   edit.on("change", dorun);
   edit.on("paste", dorun);
 
