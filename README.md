@@ -2,7 +2,7 @@
 
 This playground allows you to visualize, test, tweak and play with your mathematical JavaScript functions.
 
-[Open the live playground!](http://laktak.github.io/js-graphy/)
+[Open the live playground!](https://laktak.github.io/js-graphy/)
 
 To add a graph simply call `graph.add()` with your function. The only argument is x with y expected as the return value.
 
@@ -29,7 +29,7 @@ graph.add(function(x) { return -Math.round(x*x); }, "#00ff00");
 To include external libraries use `// script="URL"`:
 
 ```js
-// script="http://cdnjs.cloudflare.com/ajax/libs/mathjs/1.7.0/math.min.js"
+// script="https://cdnjs.cloudflare.com/ajax/libs/mathjs/1.7.0/math.min.js"
 graph.add(function(x) { return math.cube(x); });
 ```
 
@@ -40,7 +40,7 @@ If you want to share your playground
 - create a gist with your code
 - and append your *gist-id* to the playground url:
 
-http://laktak.github.io/js-graphy/#gist=f8944fa044d972456d35
+https://laktak.github.io/js-graphy/#gist=f8944fa044d972456d35
 
 ## Thanks
 
